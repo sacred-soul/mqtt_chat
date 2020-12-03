@@ -9,7 +9,7 @@
 struct mosquitto *mosq;
 char username[]="mqtttest", password[]="qwerty123";
 const char mqtt_topic[]="testmsg";
-int mqtt_flag=0, qos=1, msg_flag=0;
+int mqtt_flag=0, qos=1,disconnect_flag=0;
 
 void connect_callback(struct mosquitto *mosq, void *obj, int result) {
 	printf("\nconnect callback, result = %d , rc=%s", result,mosquitto_connack_string(result));
@@ -21,8 +21,13 @@ void subscribe_callback(struct mosquitto *mosq, void *userdata, int mid, int qos
 void message_callback(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
 {
     char* test = (char*)message->payload;
-    printf("\n%s\n", test);
-    msg_flag=1;
+    if(strcmp(test,"quit")==0)
+    {
+        printf("\nSender disconnected from broker.. Have a good day !\n");
+        disconnect_flag=1;
+    }    
+    else
+        printf("\n%s\n", test);
 }
 
 
@@ -69,7 +74,7 @@ void mqtt_thread() {
                     mqtt_flag=1;
                 }
                 else {
-                    printf("\nFailed to connect inside loop");
+                    printf("\nFailed to connect again. Disconnecting..");
                     return;
                 } 
             } 
@@ -86,5 +91,13 @@ void main() {
         sleep(1);
     printf("\nMain thread : MQTT connected");
     while(true)
+    {
         sleep(1);
+        if(disconnect_flag==1)
+        {
+            mosquitto_disconnect (mosq);
+            mosquitto_destroy(mosq);
+            break;
+        }
+    }
 }

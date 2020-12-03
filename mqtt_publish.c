@@ -58,7 +58,7 @@ void mqtt_thread() {
                     mqtt_flag=1;
                 }
                 else {
-                    printf("\nFailed to connect inside loop");
+                    printf("\nFailed to connect");
                     return;
                 } 
             } 
@@ -80,6 +80,13 @@ void main() {
         scanf("%s",input);
         const char *msg=input;
         mosquitto_publish (mosq, NULL, mqtt_topic, sizeof(input), (const void*)msg, qos, 0);
+        if(strcmp(input,"quit")==0)
+        {
+            printf("\nDisconnecting from broker.. Have a good day !\n");
+            mosquitto_disconnect (mosq);
+            mosquitto_destroy(mosq);
+            break;
+        }
         if (publish_flag != MOSQ_ERR_SUCCESS)
             printf ("\nPUBLISH FAILED, result"); 
     }
