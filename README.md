@@ -4,5 +4,5 @@ This project is a **Broadcast messenger using  MQTT commnunication protocol**, w
 
 Makefile is included and exectution can be done using **./subs** and then **./pubs** *(in seperate tab)*. 
 
-There are som flaws. Sorry for that...
+Sorry for the flaws.. (eg space cant be added inside message)
 
