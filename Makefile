@@ -1,9 +1,9 @@
-TARGET:subs pubs
+TARGET:subs_app pubs_app
 
-subs:mqtt_subs.c
+subs_app:mqtt_subs.c
 	gcc mqtt_subs.c -lpthread -lmosquitto -o subs_app
 
-pubs:mqtt_publish.c
+pubs_app:mqtt_publish.c
 	gcc mqtt_publish.c -lpthread -lmosquitto -o pubs_app
 
 clean:
