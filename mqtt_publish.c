@@ -16,7 +16,7 @@ void connect_callback(struct mosquitto *mosq, void *obj, int result) {
 }
 
 void publish_callback(struct mosquitto *mosq, void *obj, int result) {
-	printf("\ncallback: Message published Successfully");
+	printf("\nCallback: Message published Successfully");
 }
 
 void mqtt_thread() {
@@ -32,7 +32,7 @@ void mqtt_thread() {
     else {
         printf("\nMosq instance created successfully");
 		mosquitto_connect_callback_set(mosq, connect_callback);
-		mosquitto_publish_callback_set (mosq, publish_callback);
+		//mosquitto_publish_callback_set (mosq, publish_callback);
         flag = mosquitto_username_pw_set(mosq, username, password);
         if (flag == MOSQ_ERR_SUCCESS)
 		    printf("\nSETTING USERNAME & PASSWORD");
@@ -73,7 +73,7 @@ void main() {
     pthread_create(&mosquitto_t, NULL, (void*)mqtt_thread,NULL);
     while(!mqtt_flag)
         sleep(1);
-    printf("\nMain thread : MQTT connected\n\n");
+    printf("\nMain thread : MQTT connected\n\nType 'quit' to exit\n");
     while(true)
     {   
         char input[100];
