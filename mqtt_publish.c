@@ -73,11 +73,11 @@ void main() {
     pthread_create(&mosquitto_t, NULL, (void*)mqtt_thread,NULL);
     while(!mqtt_flag)
         sleep(1);
-    printf("\nMain thread : MQTT connected\n\nType 'quit' to exit\n");
+    printf("\nMain thread : MQTT connected\n\nType 'quit' to exit\n\n");
     while(true)
     {   
         char input[100];
-        scanf("%s",input);
+        gets(input);
         const char *msg=input;
         mosquitto_publish (mosq, NULL, mqtt_topic, sizeof(input), (const void*)msg, qos, 0);
         if(strcmp(input,"quit")==0)
