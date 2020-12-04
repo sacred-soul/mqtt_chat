@@ -6,5 +6,5 @@ Makefile is included and exectution can be done using commands, **./sub_app** an
 
 If you have not installed Mosquitto library, run *sudo apt install mosquitto & sudo apt install mosquitto-clients* on terminal.
 
-Sorry for the flaws.. (eg space cant be added inside message)
+Sorry for the flaws.. ^_^
 
