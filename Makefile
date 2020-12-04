@@ -7,4 +7,4 @@ pub_app:mqtt_publish.c
 	gcc mqtt_publish.c -lpthread -lmosquitto -o pub_app
 
 clean:
-	rm -f pubs subs
+	rm -f pub_app sub_app
