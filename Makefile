@@ -1,6 +1,6 @@
 TARGET:sub_app pub_app
 
-sub_app:mqtt_subs.c
+sub_app:mqtt_subscribe.c
 	gcc mqtt_subs.c -lpthread -lmosquitto -o sub_app
 
 pub_app:mqtt_publish.c
